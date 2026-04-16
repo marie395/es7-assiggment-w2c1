@@ -1,4 +1,4 @@
-Author: Tsamo Tchinda Rooswell
+//Author: Tsamo Tchinda Rooswell
 const UserCard = ({ name, role, status, startYear }) => {
   // BONUS : Calcul des années d'expérience à partir de startYear
   const currentYear = new Date().getFullYear();
