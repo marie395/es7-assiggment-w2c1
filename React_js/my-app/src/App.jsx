@@ -1,53 +1,97 @@
-import NavBar from "./Composant/NavBar";
-import UserCard from "./Composant/UserCard";
+import CourseCard from "./Composant/CourseCard";
+import Header from "./Composant/Header";
 
 
-function App() {
+
+
+ function App() {
+  
+   const courses = [
+    {
+      title: "javascript Basics",
+      instructor: "Ryan Brown",
+      duration : "3 weeks",
+      isEnrolled: true,
+      level:"Beginner", 
+   },
+       {
+      title: "Advanced javascript",
+      instructor: "Sokeng Michelle",
+      duration : "4 weeks",
+      isEnrolled: false,
+      level:"Avanced" ,
+       },
+       {
+      title: "Full-Stack Development",
+      instructor: "Tsamo Rooswell",
+      duration:  "6 weeks",
+      isEnrolled: true,
+      level:"Intermediate",
+       },
+       ];
   return (
-    <div className="app">
-      {/* Barre de navigation */}
-     
-      <NavBar />
-
-      <main className="main-content">
-        <div className="page-header">
-          <h1 className="page-title">Instructor Dashboard</h1>
-          <p className="page-subtitle">Gestion de l'équipe pédagogique</p>
-        </div>
-
-        {/* Grille de cartes — UserCard utilisé plusieurs fois (architecture réutilisable) */}
-        <div className="cards-grid ">
-          
-          <UserCard
-            name="Tsamo Rooswell"
-            role="Instructeur Principal"
-            status="Active"
-            startYear={2019}
-            
-          />
-          <UserCard
-            name="Lucas Hernandes"
-            role="Instructeur Full-Stack"
-            status="Active"                                                                  
-            startYear={2021}
-          />
-          <UserCard
-            name="Alfred Benali"
-            role="Instructeur UX/UI"
-            status="Inactive"
-            startYear={2020}
-          />
-          <UserCard
-            name="Gui Leroy"
-            role="Instructeur DevOps"
-            status="Active"
-            startYear={2018}
-          />
-        </div>
-      </main>
+    <div>
+      <Header/>
+      {courses.map((course, index) => (
+        <CourseCard key={index}  course={course} />
+      )
+      )}
     </div>
   );
-}
+};
+
+export default App;
+
+// import NavBar from "./Composant/NavBar";
+// import UserCard from "./Composant/UserCard";
+
+
+// function App() {
+//   return (
+//     <div className="app">
+//       {/* Barre de navigation */}
+     
+//       <NavBar />
+
+//       <main className="main-content">
+//         <div className="page-header">
+//           <h1 className="page-title">Instructor Dashboard</h1>
+//           <p className="page-subtitle">Gestion de l'équipe pédagogique</p>
+//         </div>
+
+//         {/* Grille de cartes — UserCard utilisé plusieurs fois (architecture réutilisable) */}
+//         <div className="cards-grid ">
+          
+//           <UserCard
+//             name="Tsamo Rooswell"
+//             role="Instructeur Principal"
+//             status="Active"
+//             startYear={2019}
+            
+//           />
+//           <UserCard
+//             name="Lucas Hernandes"
+//             role="Instructeur Full-Stack"
+//             status="Active"                                                                  
+//             startYear={2021}
+//           />
+//           <UserCard
+//             name="Alfred Benali"
+//             role="Instructeur UX/UI"
+//             status="Inactive"
+//             startYear={2020}
+//           />
+//           <UserCard
+//             name="Gui Leroy"
+//             role="Instructeur DevOps"
+//             status="Active"
+//             startYear={2018}
+//           />
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
 
  //function App() {
  
