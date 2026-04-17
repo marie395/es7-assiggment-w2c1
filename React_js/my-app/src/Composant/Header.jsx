@@ -9,7 +9,7 @@ const Header = () => {
         textAlign: "center",
       }}
     >
-      <h1>E-Learning Platform</h1>
+      <h1>E-Learning DashBoard</h1>
     </header>
   );
 };
