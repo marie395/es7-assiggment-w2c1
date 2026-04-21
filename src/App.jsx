@@ -1,3 +1,5 @@
+//Author: Tsamo Tchinda Rooswell
+
 import MovieCard from "./Composant/MovieCard";
 
 function App(){
