@@ -21,7 +21,7 @@ function App(){
   ];
 
   const filteredMovies = movies
-  .filter(movie => movie.genre === "")
+  .filter(movie => movie.genre === "Action")
   .sort((a, b) => b.year - a.year); // bonus tri
 
   return(
