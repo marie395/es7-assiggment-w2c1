@@ -1,60 +1,142 @@
 //Author: Tsamo Tchinda Rooswell
+import { useState, useEffect } from "react";
+function App() {
+  const [heartRate, setHeartRate] = useState(70);
+  const [isCritical, setIsCritical] = useState(false);
+    const [temperature, setTemperature] = useState(36);
 
-import MovieCard from "./Composant/MovieCard";
+    useEffect(() =>{
+      console.log("Heart rate changed:", heartRate);
+    }, [heartRate]
+  );
 
-function App(){
+  const inscrease = () => {
+    setHeartRate(heartRate + 1);
+  };
+  const decrease = () => {
+   if (heartRate > 0) {
+    setHeartRate(heartRate - 1);
+   }
+  };
+  const toggleStatus = () => {
+    setIsCritical(!isCritical);
+  };
+  const reset = () => {
+    setHeartRate(70);
+    setIsCritical(false);
+    setTemperature(36);
+  };
+  
+  return (
+    <div 
+    style={{
+      backgroundColor: isCritical ? "red" : "indigo",
+      padding: "20px",
+      minHeight: "100vh",
+    }}
+    >
+      <h1>Patient Monitor</h1>
 
-  const movies = [
-    {
-      id: 1, title: "Inception", genre: "Action", year: 2010, rating: 9, isTrending: true
-    },
-     {
-      id: 2, title: "PowerBook", genre: "Action", year: 2012, rating: 9, isTrending: true
-    },
-     {
-      id: 3, title: "Titanic", genre: "Romance", year: 1997, rating: 8, isTrending: false
-    },
-     {
-      id: 4, title: "Matrix", genre: "Action", year: 1999, rating: 9, isTrending: true
-    },
-     {
-      id: 5, title: "Joker", genre: "Drama", year: 2019, rating: 8.5, isTrending: false
-    }
-  ];
+      <h2>Heart Rate: {heartRate}</h2>
+      <button onClick={inscrease}>+</button>
+      <button onClick={decrease}>-</button>
 
-  const filteredMovies = movies
-  .filter(movie => movie.genre === "Action")
-  .sort((a, b) => b.year - a.year); // bonus tri
+      <h2>Temperature: {temperature}*c</h2>
+      <button onClick={() => setTemperature(temperature + 1)}>+</button>
+      <button onClick={() => setTemperature(temperature - 1)}>-</button>
 
-  return(
-    <div>
-      <h1>Cinéma Explorer</h1>
+      <h2>Statut: {isCritical ? "Critical" : "Stable"}</h2>
+      <button onClick={toggleStatus}>Toggle Status</button>
 
-      {
-        filteredMovies.length === 0 ? (
-          <p>Aucun film trouvé</p>
-        ) : (
-          filteredMovies.map(movie => (
-            <div key={movie.id}
-            style={{ border: "1px solid white", margin: "10px", padding: "10px"}}>
-              <h2>{movie.title}</h2>
-              <p>Genre: {movie.genre}</p>
-              <p>Année: {movie.year}</p>
-              <p>Note: {movie.rating}</p>
+      {heartRate > 100 && <p> High Heart Rate</p>}
+      {isCritical && <p> Emergency Mode Activated</p>}
+      {temperature > 39 && <p> Fever Alert</p>}
 
-              {movie.isTrending && <span> Trending </span> }
-              {movie.rating > 8 && <span>Top Rated </span>}
-              {movie.year < 2000 && <span>Classic </span>}
+      <button onClick={reset}>Reset</button>
 
-            </div>
-          ))
-        )
-      }
     </div>
   );
 }
 
 export default App;
+
+
+/*
+1- pourquoi on ne modifie jamais directement une variable en React ?
+parce que React ne detecte pas les changements si on modifie directement une variable
+il faut utiliser useState pour informer React qu'il doit mettre a jour l'interface.
+
+2- pourquoi setState declenge un re-render ?
+parceque React comprend que les donnees ont changer, donc il met a jour automatiquement l'affichage.
+
+3- Difference entre state et variable normale ?
+- state : Provoque un re-render quand il change
+-Variable normale : ne met pas a jour l'affichage
+*/
+
+
+
+
+
+
+
+
+
+// import MovieCard from "./Composant/MovieCard";
+
+// function App(){
+
+//   const movies = [
+//     {
+//       id: 1, title: "Inception", genre: "Action", year: 2010, rating: 9, isTrending: true
+//     },
+//      {
+//       id: 2, title: "PowerBook", genre: "Action", year: 2012, rating: 9, isTrending: true
+//     },
+//      {
+//       id: 3, title: "Titanic", genre: "Romance", year: 1997, rating: 8, isTrending: false
+//     },
+//      {
+//       id: 4, title: "Matrix", genre: "Action", year: 1999, rating: 9, isTrending: true
+//     },
+//      {
+//       id: 5, title: "Joker", genre: "Drama", year: 2019, rating: 8.5, isTrending: false
+//     }
+//   ];
+
+//   const filteredMovies = movies
+//   .filter(movie => movie.genre === "Action")
+//   .sort((a, b) => b.year - a.year); // bonus tri
+
+//   return(
+//     <div>
+//       <h1>Cinéma Explorer</h1>
+
+//       {
+//         filteredMovies.length === 0 ? (
+//           <p>Aucun film trouvé</p>
+//         ) : (
+//           filteredMovies.map(movie => (
+//             <div key={movie.id}
+//             style={{ border: "1px solid white", margin: "10px", padding: "10px"}}>
+//               <h2>{movie.title}</h2>
+//               <p>Genre: {movie.genre}</p>
+//               <p>Année: {movie.year}</p>
+//               <p>Note: {movie.rating}</p>
+
+//               {movie.isTrending && <span> Trending </span> }
+//               {movie.rating > 8 && <span>Top Rated </span>}
+//               {movie.year < 2000 && <span>Classic </span>}
+
+//             </div>
+//           ))
+//         )
+//       }
+//     </div>
+//   );
+// }
+
+// export default App;
 
 // import UserList from "./Composant/UserList";
 
